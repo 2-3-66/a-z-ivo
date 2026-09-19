@@ -1,1 +1,69 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>A-Z-IVO V3 SON REEL</title><style>body{margin:0;background:#0f0f0f;color:#fff;font-family:system-ui;text-align:center;padding:18px}h1{font-size:52px;font-weight:900;background:linear-gradient(90deg,#FF8C00,#FFD700,#00FF88);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.card{background:#1a1a1a;border-radius:26px;padding:18px;max-width:540px;margin:0 auto;border:1px solid #2a2a2a}select,input{width:100%;padding:16px;border-radius:14px;border:0;background:#252525;color:#fff;margin:8px 0}button{width:100%;padding:18px;border-radius:14px;border:0;font-weight:900;font-size:18px;margin-top:10px;cursor:pointer}.main{background:linear-gradient(90deg,#FF8C00,#00C853);color:#fff}.sec{background:#222;color:#fff;border:1px solid #333}#viz{height:70px;background:#0e0e0e;border-radius:14px;margin:12px 0;display:flex;align-items:end;justify-content:center;gap:4px;padding:8px}.bar{width:10px;background:linear-gradient(#FF8C00,#00FF88);border-radius:6px;height:8px;transition:.08s}</style></head><body><h1>A-Z-IVO</h1><p>🇨🇮 V3 - Vrai Beat Ivoirien</p><div class="card"><select id="style"><option value="coupe">Coupé-Décalé 130BPM</option><option value="zouglou">Zouglou 95BPM</option><option value="afro">Afrobeat 110BPM</option><option value="rap">Rap Ivoire 140BPM</option><option value="amapiano">Amapiano 115BPM</option></select><input id="txt" value="Coupé décalé Yopougon"><button class="main" onclick="playBeat()">🎵 GENERER & JOUER</button><div id="viz"></div><div id="status" style="color:#0f8;margin:10px">Prêt à composer...</div><button class="sec" onclick="stopBeat()">⏹ STOP LE SON</button><button class="sec" onclick="share()">📲 Partager WhatsApp</button></div><script>let ctx,timer,isPlaying=false;function makeViz(){let v=document.getElementById('viz');v.innerHTML='';for(let i=0;i<18;i++){let b=document.createElement('div');b.className='bar';v.appendChild(b)}}makeViz();function playBeat(){if(!ctx)ctx=new(window.AudioContext||window.webkitAudioContext)();if(ctx.state=='suspended')ctx.resume();let style=document.getElementById('style').value;let bpm={coupe:130,zouglou:95,afro:110,rap:140,amapiano:115}[style]||120;document.getElementById('status').innerText='🔥 Joue: '+style+' '+bpm+' BPM';stopBeat();isPlaying=true;let step=0,bars=document.querySelectorAll('.bar');timer=setInterval(()=>{let k=step%16;bars.forEach((b,i)=>b.style.height=(i==k?30+Math.random()*40+'px':'8px'));if(k%4==0)kick();if(k==4||k==12)snare();if(k%2==1)hat();if(k%4==2)bass(style);step++},(60000/bpm)/4)}function kick(){let o=ctx.createOscillator(),g=ctx.createGain();o.frequency.setValueAtTime(150,ctx.currentTime);o.frequency.exponentialRampToValueAtTime(35,ctx.currentTime+0.12);g.gain.setValueAtTime(1,ctx.currentTime);g.gain.exponentialRampToValueAtTime(0.01,ctx.currentTime+0.25);o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+0.25)}function snare(){let b=ctx.createBuffer(1,ctx.sampleRate*0.2,ctx.sampleRate),d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*0.4;let s=ctx.createBufferSource();s.buffer=b;let f=ctx.createBiquadFilter();f.type='highpass';f.frequency.value=1200;let g=ctx.createGain();g.gain.setValueAtTime(0.7,ctx.currentTime);g.gain.exponentialRampToValueAtTime(0.01,ctx.currentTime+0.2);s.connect(f);f.connect(g);g.connect(ctx.destination);s.start()}function hat(){let o=ctx.createOscillator(),g=ctx.createGain();o.type='square';o.frequency.value=7000;g.gain.setValueAtTime(0.12,ctx.currentTime);g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.06);o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+0.06)}function bass(s){let o=ctx.createOscillator(),g=ctx.createGain();o.frequency.value=s=='amapiano'?55:75;o.type='sine';g.gain.setValueAtTime(0.6,ctx.currentTime);g.gain.exponentialRampToValueAtTime(0.01,ctx.currentTime+0.35);o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+0.35)}function stopBeat(){isPlaying=false;clearInterval(timer);makeViz()}function share(){let u='https://2-3-66.github.io/a-z-ivo/';window.open('https://wa.me/?text='+encodeURIComponent('Mon son A-Z-IVO '+u),'_blank')}</script></body></html>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A-Z-IVO V3 - SON REEL</title>
+<style>
+body{margin:0;background:#0f0f0f;color:#fff;font-family:system-ui;text-align:center;padding:18px}
+h1{font-size:52px;font-weight:900;background:linear-gradient(90deg,#FF8C00,#FFD700,#00FF88);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:10px}
+.card{background:#1a1a1a;border-radius:26px;padding:18px;max-width:540px;margin:0 auto;border:1px solid #2a2a2a}
+select,input{width:100%;padding:16px;border-radius:14px;border:0;background:#252525;color:#fff;margin:8px 0;font-size:16px;box-sizing:border-box}
+button{width:100%;padding:18px;border-radius:14px;border:0;font-weight:900;font-size:18px;margin-top:10px;cursor:pointer}
+.main{background:linear-gradient(90deg,#FF8C00,#00C853);color:#fff}
+.sec{background:#222;color:#fff;border:1px solid #333}
+#viz{height:70px;background:#0e0e0e;border-radius:14px;margin:12px 0;display:flex;align-items:end;justify-content:center;gap:4px;padding:8px}
+.bar{width:10px;background:linear-gradient(#FF8C00,#00FF88);border-radius:6px;height:8px;transition:.08s}
+#status{color:#00ff88;font-weight:700;margin:10px 0;min-height:20px}
+</style>
+</head>
+<body>
+<h1>A-Z-IVO</h1>
+<p>🇨🇮 V3 - Vrai Beat Ivoirien</p>
+<div class="card">
+<select id="style">
+<option value="coupe">Coupe-Decale 130BPM - Atalaku</option>
+<option value="zouglou">Zouglou 95BPM</option>
+<option value="afro">Afrobeat 110BPM</option>
+<option value="rap">Rap Ivoire 140BPM</option>
+<option value="amapiano">Amapiano CI 115BPM - Log Drum</option>
+</select>
+<input id="txt" value="Coupe decale Yopougon">
+<button class="main" onclick="playBeat()">🎵 GENERER & JOUER MON SON</button>
+<div id="viz"></div>
+<div id="status">Pret a composer...</div>
+<button class="sec" onclick="stopBeat()">⏹ STOP LE SON</button>
+<button class="sec" onclick="share()">📲 Partager sur WhatsApp</button>
+<p style="opacity:.5;font-size:12px">Mets le volume a fond 🔊</p>
+</div>
+<script>
+let ctx,timer,isPlaying=false;
+function makeViz(){let v=document.getElementById('viz');v.innerHTML='';for(let i=0;i<18;i++){let b=document.createElement('div');b.className='bar';v.appendChild(b)}}
+makeViz();
+function playBeat(){
+if(!ctx) ctx=new (window.AudioContext||window.webkitAudioContext)();
+if(ctx.state=='suspended') ctx.resume();
+let style=document.getElementById('style').value;
+let bpm={coupe:130,zouglou:95,afro:110,rap:140,amapiano:115}[style]||120;
+document.getElementById('status').innerText='🔥 Joue: '+style+' '+bpm+' BPM';
+stopBeat(); isPlaying=true;
+let step=0; let bars=document.querySelectorAll('.bar');
+timer=setInterval(()=>{
+let k=step%16;
+bars.forEach((b,i)=>b.style.height=(i==k? (30+Math.random()*40)+'px':'8px'));
+if(k%4==0) kick();
+if(k==4||k==12) snare();
+if(k%2==1) hat();
+if(k%4==2) bass(style);
+step++;
+},(60000/bpm)/4);
+}
+function kick(){let o=ctx.createOscillator(),g=ctx.createGain();o.frequency.setValueAtTime(150,ctx.currentTime);o.frequency.exponentialRampToValueAtTime(35,ctx.currentTime+0.12);g.gain.setValueAtTime(1,ctx.currentTime);g.gain.exponentialRampToValueAtTime(0.01,ctx.currentTime+0.25);o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+0.25)}
+function snare(){let b=ctx.createBuffer(1,ctx.sampleRate*0.2,ctx.sampleRate);let d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*0.4;let s=ctx.createBufferSource();s.buffer=b;let f=ctx.createBiquadFilter();f.type='highpass';f.frequency.value=1200;let g=ctx.createGain();g.gain.setValueAtTime(0.7,ctx.currentTime);g.gain.exponentialRampToValueAtTime(0.01,ctx.currentTime+0.2);s.connect(f);f.connect(g);g.connect(ctx.destination);s.start()}
+function hat(){let o=ctx.createOscillator(),g=ctx.createGain();o.type='square';o.frequency.value=7000;g.gain.setValueAtTime(0.12,ctx.currentTime);g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.06);o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+0.06)}
+function bass(st){let o=ctx.createOscillator(),g=ctx.createGain();o.frequency.value=st=='amapiano'?55:75;o.type='sine';g.gain.setValueAtTime(0.6,ctx.currentTime);g.gain.exponentialRampToValueAtTime(0.01,ctx.currentTime+0.35);o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+0.35)}
+function stopBeat(){isPlaying=false;clearInterval(timer);makeViz();let s=document.getElementById('status');if(s.innerText.includes('Joue')) s.innerText='⏹ Stoppe. Pret a rejouer.'}
+function share(){let u='https://2-3-66.github.io/a-z-ivo/';window.open('https://wa.me/?text='+encodeURIComponent('🎵 Mon son A-Z-IVO: '+u),'_blank')}
+</script>
+</body>
+</html>
