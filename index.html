@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A-Z-IVO</title>
+<style>
+body{margin:0;background:#0f0f0f;color:white;font-family:sans-serif;text-align:center;padding:25px}
+h1{font-size:48px;background:linear-gradient(90deg,orange,#00ff88);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:0}
+.card{background:#1e1e1e;border-radius:20px;padding:20px;margin:25px auto;max-width:480px}
+input{width:92%;padding:18px;border-radius:12px;border:0;font-size:16px}
+button{width:100%;padding:18px;border-radius:12px;border:0;background:linear-gradient(90deg,orange,green);color:white;font-weight:bold;font-size:18px;margin-top:15px}
+</style>
+</head>
+<body>
+<h1>A-Z-IVO</h1>
+<p>De A à Z, ta musique ivoirienne t'appartient</p>
+<div class="card">
+<input id="prompt" placeholder="Ex: coupé-décalé Yopougon 120bpm joyeux">
+<button onclick="gen()">GENERER MON SON</button>
+<p id="status"></p>
+<audio id="player" controls style="display:none;width:100%;margin-top:15px"></audio>
+</div>
+<script>
+function gen(){
+let p=document.getElementById('prompt').value;
+document.getElementById('status').innerText="A-Z-IVO compose : "+p+" ...";
+}
+</script>
+</body>
+</html>
